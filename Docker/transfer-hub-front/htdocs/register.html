@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Transfer-Hub</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/sb-1.6.0/sp-2.2.0/sl-1.7.0/datatables.min.css">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark-icons.css">
+    <link rel="stylesheet" href="assets/css/Register-form.css">
+</head>
+
+<body>
+    <div class="rf-register-form">
+        <form class="rg-form">
+            <h2>Register form</h2>
+            <div class="rf-input-container"><i class="fa fa-star fa fa-user rf-icon"></i><input class="form-control rf-input-field" type="text" id="registerUsername" placeholder="Username"></div>
+            <div class="rf-input-container"><i class="fa fa-star fa fa-envelope rf-icon"></i><input class="form-control rf-input-field" type="text" id="registerEmail" placeholder="Email"></div>
+            <div class="rf-input-container"><i class="fa fa-star fa fa-key rf-icon"></i><input class="form-control rf-input-field" type="password" id="registerPassword" placeholder="Password"></div><button class="btn btn-primary rf-btn" type="button" onclick="register()">Register</button>
+        </form>
+    </div>
+    <div class="toast fade hide" role="alert" data-bs-delay="10000" id="toast-alert" style="position: absolute;top: 2;right: 1 !important;top: 100px;right: 5px;z-index: 9999;">
+        <div class="toast-header bg-dark-subtle"><strong class="me-auto" id="toast-header">Title</strong><button class="btn-close ms-2 mb-1 close" type="button" aria-label="Close" data-bs-dismiss="toast"></button></div>
+        <div class="toast-body bg-body-tertiary" role="alert">
+            <p id="toast-message">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/general.js"></script>
+    <script src="assets/js/authentication/authentication.js"></script>
+    <script src="assets/js/scope/ScopeAdministration.js"></script>
+    <script src="assets/js/scope/ScopeOverview.js"></script>
+</body>
+
+</html>

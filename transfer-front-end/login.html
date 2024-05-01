@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Transfer-Hub</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/sb-1.6.0/sp-2.2.0/sl-1.7.0/datatables.min.css">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark-icons.css">
+    <link rel="stylesheet" href="assets/css/Register-form.css">
+</head>
+
+<body>
+    <section class="position-relative py-4 py-xl-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2>Log in</h2>
+                    <p class="w-lg-50">Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra nunc. Vestibulum dui eget ultrices.</p>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 col-xl-4">
+                    <div class="card mb-5">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"></path>
+                                </svg></div>
+                            <div class="mb-3"><input type="text" id="username" class="form-control" placeholder="Username"></div>
+                            <div class="mb-3"><input type="password" id="password" class="form-control" name="password" placeholder="Password"></div>
+                            <div class="mb-3"><button class="btn" id="btn_login_user">Login</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="toast fade hide" role="alert" data-bs-delay="10000" id="toast-alert" style="position: absolute;top: 2;right: 1 !important;top: 100px;right: 5px;z-index: 9999;">
+        <div class="toast-header bg-dark-subtle"><strong class="me-auto" id="toast-header">Title</strong><button class="btn-close ms-2 mb-1 close" type="button" aria-label="Close" data-bs-dismiss="toast"></button></div>
+        <div class="toast-body bg-body-tertiary" role="alert">
+            <p id="toast-message">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/general.js"></script>
+    <script src="assets/js/authentication/authentication.js"></script>
+    <script src="assets/js/scope/ScopeAdministration.js"></script>
+    <script src="assets/js/scope/ScopeOverview.js"></script>
+</body>
+
+</html>

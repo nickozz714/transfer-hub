@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Transfer-Hub</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/sb-1.6.0/sp-2.2.0/sl-1.7.0/datatables.min.css">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark-icons.css">
+    <link rel="stylesheet" href="assets/css/Register-form.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-exchange">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M5 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                        <path d="M19 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                        <path d="M19 8v5a5 5 0 0 1 -5 5h-3l3 -3m0 6l-3 -3"></path>
+                        <path d="M5 16v-5a5 5 0 0 1 5 -5h3l-3 -3m0 6l3 -3"></path>
+                    </svg></span><span>Transfer Hub</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-5">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" id="link_transfer" href="#">Transfers</a></li>
+                    <li class="nav-item"><a class="nav-link active" id="link_servers" href="#">Servers</a></li>
+                    <li class="nav-item"><a class="nav-link active" id="link_credentials" href="#">Credentials</a></li>
+                    <li class="nav-item"><a class="nav-link active" id="link_scope_administration" href="#" data-bs-target="#scopeAdministration" data-bs-toggle="modal">Scope administration</a></li>
+                    <li class="nav-item d-xxl-flex align-items-xxl-center"><select id="select_scope" class="form-control"></select></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="modal fade" role="dialog" tabindex="-1" id="routesModify">
+        <div class="modal-dialog modal-xl modal-fullscreen" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="routesModifyTitle"></h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-3">Transfersection</a></li>
+                            <li class="nav-item" role="presentation" id="tab_in_progress" style="display: none;"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">In Progress</a></li>
+                            <li class="nav-item" role="presentation" id="tab_progress_events"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">Progress Events</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" role="tabpanel" id="tab-3">
+                                <section>
+                                    <div class="container">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col"><label class="form-label">Name of the route</label><input class="form-control" type="text" id="route_name"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col"><label class="form-label">Description</label><input class="form-control" type="text" id="route_description"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col"><label class="form-label">Status</label><select class="form-select" id="route_status">
+                                                        <option value="ACTIVE" selected="">Active</option>
+                                                        <option value="INACTIVE">Disabled</option>
+                                                        <option value="ERROR">Error</option>
+                                                        <option value="FAILED">Failed</option>
+                                                    </select>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col"><label class="form-label">Endpoints</label>
+                                                    <div>
+                                                        <ul class="nav nav-tabs" role="tablist">
+                                                            <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Source</a></li>
+                                                            <li class="nav-item" role="presentation"><a class="nav-link protocol-select" role="tab" data-bs-toggle="tab" href="#tab-2">Destination</a></li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane active" role="tabpanel" id="tab-1">
+                                                                <div class="row">
+                                                                    <div class="col-xl-2"><label class="form-label">Protocol</label><select class="form-select protocol-select" id="source_select_protocol">
+                                                                            <option value="sftp">sftp</option>
+                                                                            <option value="file">file</option>
+                                                                            <option value="azure-storage-blob">Azure Blob Storage</option>
+                                                                            <option value="azure-files">Azure File Storage</option>
+                                                                        </select></div>
+                                                                    <div class="col-xl-10"><label class="form-label">Hostname</label><select class="form-select" id="source_select_host"></select></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-xl-10"><label class="form-label">Path</label><input class="form-control" type="text" id="source_input_path"></div>
+                                                                    <div class="col"><label class="form-label">Credential</label><select class="form-select" id="source_select_credential"></select></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-xl-12"><label class="form-label">Parameters</label><input class="form-control" type="text" id="source_input_parameters"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane" role="tabpanel" id="tab-2">
+                                                                <div class="row">
+                                                                    <div class="col-xl-2"><label class="form-label">Protocol</label><select class="form-select protocol-select" id="destination_select_protocol" data-param="destination">
+                                                                            <option value="sftp">sftp</option>
+                                                                            <option value="file">file</option>
+                                                                            <option value="azure-storage-blob">Azure Blob Storage</option>
+                                                                            <option value="azure-files">Azure File Storage</option>
+                                                                        </select></div>
+                                                                    <div class="col-xl-10"><label class="form-label">Hostname</label><select class="form-select" id="destination_select_host"></select></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-xl-10"><label class="form-label">Path</label><input class="form-control" type="text" id="destination_input_path" data-param="destination"></div>
+                                                                    <div class="col"><label class="form-label">Credential</label><select class="form-select" id="destination_select_credential"></select></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-xl-12"><label class="form-label">Parameters</label><input class="form-control" type="text" id="destination_input_parameters" data-param="destination"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="tab-4">
+                                <div class="table-responsive" style="width: 100%;min-height: 600px;">
+                                    <table class="table" id="inProgressOverviewTable" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Nr.</th>
+                                                <th>Transfer</th>
+                                                <th>File</th>
+                                                <th>Processed at</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="tab-5">
+                                <div class="table-responsive" style="width: 100%;min-height: 600px;">
+                                    <table class="table" id="progressEventOverviewTable" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Nr.</th>
+                                                <th>Transfer</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>File</th>
+                                                <th>Type</th>
+                                                <th>Exception</th>
+                                                <th>Processed at</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" id="btn-save" type="button">Save</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="serverModify">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="serverModifyTitle"></h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <section>
+                        <div class="container">
+                            <form>
+                                <p>Please note that a server is used in an endpoint in different ways. Therefore it can be a server, but also an Azure Storage Account. The port and description is not required and can be left empty.</p>
+                                <hr>
+                                <div class="row">
+                                    <div class="col"><label class="form-label">Hostname</label><input class="form-control" type="text" id="server_hostname"></div>
+                                </div>
+                                <div class="row sftp credential">
+                                    <div class="col"><label class="form-label">Port</label><input class="form-control" type="number" id="server_port"></div>
+                                </div>
+                                <div class="row sftp credential">
+                                    <div class="col"><label class="form-label">Description</label><input class="form-control" type="text" id="server_description"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" id="btn-save-server" type="button">Save</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="credentialModify">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="credentialModifyTitle-1"></h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <section>
+                        <div class="container">
+                            <form>
+                                <div class="row">
+                                    <div class="col"><label class="form-label">Credential type</label><select class="form-select" id="credential_type">
+                                            <option value="SFTP" selected="">sftp</option>
+                                            <option value="FILE">file</option>
+                                            <option value="OAUTH">Azure Identity</option>
+                                            <option value="SAS_TOKEN">Azure SAS - Token</option>
+                                            <option value="ACCESS_KEY">Azure Access Key</option>
+                                        </select></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><label class="form-label">Username</label><input class="form-control" type="text" id="credential_username"></div>
+                                </div>
+                                <div class="row sftp credential">
+                                    <div class="col"><label class="form-label">Password</label><input class="form-control" type="password" id="credential_password"></div>
+                                </div>
+                                <div class="row sftp credential">
+                                    <div class="col"><label class="form-label">Public key</label><input class="form-control" type="text" id="credential_public_key"></div>
+                                </div>
+                                <div class="row sftp credential">
+                                    <div class="col"><label class="form-label">Private key</label><textarea class="form-control" id="credential_private_key"></textarea></div>
+                                </div>
+                                <div class="row sftp credential">
+                                    <div class="col"><label class="form-label">Keyphrase</label><input class="form-control" type="password" id="credential_keyphrase"></div>
+                                </div>
+                                <div class="row sas_token access_key credential">
+                                    <div class="col"><label class="form-label">Token</label><input class="form-control" type="password" id="credential_token"></div>
+                                </div>
+                                <div class="row oauth credential">
+                                    <div class="col"><label class="form-label">Client Id</label><input class="form-control" type="password" id="credential_client_id"></div>
+                                </div>
+                                <div class="row oauth credential">
+                                    <div class="col"><label class="form-label">Client Secret</label><input class="form-control" type="password" id="credential_client_secret"></div>
+                                </div>
+                                <div class="row oauth credential">
+                                    <div class="col"><label class="form-label">Tenant Id</label><input class="form-control" type="password" id="credential_tenant_id"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" id="btn-save-credential" type="button">Save</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="scopeAdministration">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Scope Administration</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" role="presentation" id="management_tab"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#scope_management_pane">Management</a></li>
+                            <li class="nav-item" role="presentation" id="registration_tab"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#scope_registration_pane">Registration</a></li>
+                            <li class="nav-item" role="presentation" id="creation_tab"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#scope_creation_pane">Creation</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane" role="tabpanel" id="scope_management_pane">
+                                <div style="padding-top: 10px;"><select id="select_scope_management" class="form-select"></select></div>
+                                <div><label class="form-label">Scope name</label><input type="text" id="input_management_scope_name" class="form-control"></div>
+                                <div class="text-end" style="padding-top: 10px;"><button class="btn btn-primary" id="btn_save_scope" type="button">Save scope</button></div>
+                            </div>
+                            <div class="tab-pane active" role="tabpanel" id="scope_registration_pane">
+                                <div style="padding-top: 10px;"><select id="select_scope_registration" class="form-select"></select></div>
+                                <div style="padding-top: 10px;"><select id="select_scope_registration_principals" class="form-select"></select></div>
+                                <div style="padding-top: 10px;"><select id="select_scope_role" class="form-select">
+                                        <option value="ADMIN">Administrator</option>
+                                        <option value="PRINCIPAL" selected="">Principal</option>
+                                    </select></div>
+                                <div class="text-end" style="padding-top: 10px;"><button class="btn btn-primary text-end" id="btn_add_principal" type="button">Add principal to scope</button></div>
+                                <div>
+                                    <div class="table-responsive">
+                                        <table class="table" id="table_scope_registration">
+                                            <thead>
+                                                <tr>
+                                                    <th>Principal</th>
+                                                    <th>Role</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div><select id="select_scope_role_principal" class="form-select">
+                                        <option value="ADMIN">Administrator</option>
+                                        <option value="PRINCIPAL" selected="">Principal</option>
+                                    </select></div>
+                                <div style="padding-top: 10px;text-align: right;">
+                                    <div class="btn-group" role="group"><button class="btn btn-primary" id="btn_change" type="button">Change Principal Role</button><button class="btn btn-primary" type="button">Remove Principal from Scope</button></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="scope_creation_pane">
+                                <div><label class="form-label">Scope name</label><input type="text" id="input_scope_name" class="form-control"></div>
+                                <div class="text-end" style="padding-top: 10px;"><button class="btn btn-primary" id="btn_create_scope" type="button">Create scope</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <section id="transferOverview">
+        <div class="container" style="padding: 12px;min-height: 600px;width: initial;">
+            <div class="row">
+                <div class="col" style="text-align: right;">
+                    <div class="btn-group" role="group"><button class="btn btn-dark" id="btn-new-transfer" type="button">Create new transfer</button><button class="btn btn-dark" id="btn_refresh" type="button">Refresh results</button></div>
+                </div>
+            </div>
+            <div class="row" style="padding-top: 12px;padding-bottom: 12px;">
+                <div class="col">
+                    <div class="table-responsive" style="min-height: 600px;width: 100%;">
+                        <table class="table" id="transferOverviewTable" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Last updated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="serverOverview" style="display: none;">
+        <div class="container" style="padding: 12px;">
+            <div class="row">
+                <div class="col" style="text-align: right;">
+                    <div class="btn-group" role="group"><button class="btn btn-dark" id="btn-new-server" type="button">Create new host</button><button class="btn btn-dark" id="btn_refresh_server" type="button">Refresh results</button></div>
+                </div>
+            </div>
+            <div class="row" style="padding-top: 12px;padding-bottom: 12px;">
+                <div class="col">
+                    <div class="table-responsive" style="width: 100%;min-height: 600px;">
+                        <table class="table" id="serverOverviewTable" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Nr.</th>
+                                    <th>Hostname</th>
+                                    <th>Port</th>
+                                    <th>Description</th>
+                                    <th>Last updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="credentialOverview" style="display: none;">
+        <div class="container" style="padding: 12px;">
+            <div class="row">
+                <div class="col" style="text-align: right;">
+                    <div class="btn-group" role="group"><button class="btn btn-dark" id="btn-new-credential" type="button">Create new credential</button><button class="btn btn-dark" id="btn_refresh_credentials" type="button">Refresh results</button></div>
+                </div>
+            </div>
+            <div class="row" style="padding-top: 12px;padding-bottom: 12px;">
+                <div class="col">
+                    <div class="table-responsive" style="width: 100%;min-height: 600px;">
+                        <table class="table" id="credentialOverviewTable" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Nr.</th>
+                                    <th>Username</th>
+                                    <th>Type</th>
+                                    <th>Last updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="toast fade hide" role="alert" data-bs-delay="10000" id="toast-alert" style="position: absolute;top: 2;right: 1 !important;top: 100px;right: 5px;z-index: 9999;">
+        <div class="toast-header bg-dark-subtle"><strong class="me-auto" id="toast-header">Title</strong><button class="btn-close ms-2 mb-1 close" type="button" aria-label="Close" data-bs-dismiss="toast"></button></div>
+        <div class="toast-body bg-body-tertiary" role="alert">
+            <p id="toast-message">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/sb-1.6.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
+    <script src="assets/js/general.js"></script>
+    <script src="assets/js/transfer/RoutesModifyComponent.js"></script>
+    <script src="assets/js/transfer/RoutesOververview.js"></script>
+    <script src="assets/js/credential/CredentialModifyComponent.js"></script>
+    <script src="assets/js/credential/CredentialsOverview.js"></script>
+    <script src="assets/js/scope/ScopeAdministration.js"></script>
+    <script src="assets/js/scope/ScopeOverview.js"></script>
+    <script src="assets/js/server/ServerModifyComponent.js"></script>
+    <script src="assets/js/server/ServerOverview.js"></script>
+</body>
+
+</html>

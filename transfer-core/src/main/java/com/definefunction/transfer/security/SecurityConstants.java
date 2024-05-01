@@ -1,0 +1,7 @@
+package com.definefunction.transfer.security;
+
+public class SecurityConstants {
+
+    public static final long JWT_EXPIRATION = 86400000;
+    public static final String JWT_SECERT = "oJ6fy6tHmzPFJtcI9lYK8k6zcaGZzjBdkyEvzmaN0pNvkyNvDVED4oynX52AorPMvnjubFf8L91jzbuVFnJaQICVcw91Eh6TMPw4rOMBfdjGjsMk7AbHfnrbhxBo5lHacMMxObwTwaYaztLpwH5iJNBStlKAVEp8rOlWqPr6Ugif5f6LK4TsnwMcnb8R1TwguRZq4nrg8rTp66yv1jnLOWhFeO7xO73WxvAXoOBbV0wuPem1YDNlIDhjNAmGj4bP";
+}
